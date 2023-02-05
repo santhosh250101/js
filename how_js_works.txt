@@ -1,0 +1,41 @@
+Javascript is a single Threaded language.How asynchronous js works lets understand.
+
+consider the snippet.
+
+let a= 100;
+console.log(a);
+
+If you give above code snippet to browser it will not understand.So, javascript has js engine (v8 engine) which will convert our js code into
+browser understandable code.
+This enginer has two main parts
+
+1. Heap
+2.callstack
+
+Heap is used for memory management where variable declarations and their values are stored.
+call stack is used for executing code,and we have only one call stack.
+
+
+In heap
+let a=100
+
+In call stack
+console.log(a)
+
+
+consider the snippet
+
+let a= 100;
+setTimeout(function(){
+console.log('inside setTimeout')
+},2000);
+console.log(a);
+
+in the above snippet browser executes code line by line,
+each time it pushes code to call stack and executes.
+
+when it push setTimeout to call stack browser don't understand this function, as it utility provided by browser api.
+so broswer api takes it and handles.
+when the setTimeout is completed it is pushed to call back queue.
+
+we have event loop in browser .This event loop keeps on checking the call stack. if it is empty the call back queue pops and pushed into call stack and executes.
